@@ -21,16 +21,28 @@
           <input autocomplete="username" id="id" type="text" name="username" class="form__input" placeholder="ID" required>
         </div>
         <div class="form__field">
+          <label for="login__username"><svg class="icon">
+              <use xlink:href="#icon-user"></use>
+            </svg><span class="hidden">UserName</span></label>
+          <input autocomplete="username" id="id" type="text" name="username" class="form__input" placeholder="UserName" required>
+        </div>
+        <div class="form__field">
           <label for="login__password"><svg class="icon">
               <use xlink:href="#icon-lock"></use>
             </svg><span class="hidden">Password</span></label>
           <input id="psword" type="password" name="password" class="form__input" placeholder="Password" required>
         </div>
         <div class="form__field">
-          <input id="button" type="submit" value="Sign Up">
+          <label for="login__username"><svg class="icon">
+              <use xlink:href="#icon-lock"></use>
+            </svg><span class="hidden">Cofirm-Password</span></label>
+          <input autocomplete="username" id="id" type="text" name="username" class="form__input" placeholder="Cofirm-Password" required>
+        </div>
+        <div class="form__field">
+          <input id="button" type="submit" value="Sign In">
         </div>
       </form>
-      <p class="text--center">Not a member? <a href="/register">Sign in now</a> <svg class="icon">
+      <p class="text--center">Aleady member? <a href="/register">Sign up now</a> <svg class="icon">
           <use xlink:href="#icon-arrow-right"></use>
         </svg></p>
     </div>
