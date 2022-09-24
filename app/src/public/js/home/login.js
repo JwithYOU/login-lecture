@@ -20,5 +20,14 @@ function login() {
     body: JSON.stringify(req),
   })
   .then((res) => res.json())
-  .then((res) => console.log(res));
+  .then((res) => {
+    if(res.success) {
+      location.href = "/";
+    } else {
+      alert(res.msg);
+    }
+  })
+  .catch((err) => {
+    console.error(new Error("로그인 중에 에러 발생")) // new Error를 통해서 에러를 만들어 줄 수 있음
+  });
 }
