@@ -14,21 +14,27 @@
   <body class="align">
     <div class="grid">
       <form action="https://httpbin.org/post" method="POST" class="form login">
+        <!-- ID 시작 -->
         <div class="form__field">
           <label for="login__username"><svg class="icon">
               <use xlink:href="#icon-user"></use>
             </svg><span class="hidden">ID</span></label>
           <input autocomplete="username" id="id" type="text" name="username" class="form__input" placeholder="ID" required>
         </div>
+        <!-- ID 종료 -->
+        <!-- 비밀번호 시작 -->
         <div class="form__field">
           <label for="login__password"><svg class="icon">
               <use xlink:href="#icon-lock"></use>
             </svg><span class="hidden">Password</span></label>
           <input id="psword" type="password" name="password" class="form__input" placeholder="Password" required>
         </div>
+        <!-- 비밀번호 종료 -->
+        <!-- 로그인 시작 -->
         <div class="form__field">
-          <input id="button" type="submit" value="Sign Up">
+          <input id="button" type="button" value="Sign Up">
         </div>
+        <!-- 로그인 종료 -->
       </form>
       <p class="text--center">Not a member? <a href="/register">Sign in now</a> <svg class="icon">
           <use xlink:href="#icon-arrow-right"></use>
