@@ -21,8 +21,13 @@ const process = {
     const response = user.login();
     return res.json(response);
   },
-}
 
+  register: (req, res) => {
+    const user = new User(req.body);
+    const response = user.register();
+    return res.json(response);
+  },
+}
 
 
 // module을 오브젝트 형태로 내보내는데 value 없이 key만 보내면 hello : hello, login : login 이런 형태로 나가는 거라고 볼 수 있다.
