@@ -3,6 +3,7 @@
 class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
   static #users = {
     id: ["카카오", "네이버", "쿠팡"],
+    name: ["김코딩", "박해커", "이테크"],
     psword: ["1234", "1234", "1234"],
   }
 
@@ -26,6 +27,14 @@ class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
       return newUser;
   }, {});
     return userInfo;
+  }
+
+  static save(userInfo) {
+    const users = this.#users;
+    users.id.push(userInfo.id);
+    users.name.push(userInfo.name);
+    users.psword.push(userInfo.psword);
+    return { success: true };
   }
 }
 
