@@ -16,6 +16,17 @@ class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
     }, {})
     return newUsers;
   }
+
+  static getUserInfo(id) {
+    const users = this.#users; // 전체 아이디, 비밀번호 불러옴
+    const idx = users.id.indexOf(id);
+    const userKeys = Object.keys(users);
+    const userInfo = userKeys.reduce((newUser, info) => {
+      newUser[info] = users[info][idx];
+      return newUser;
+  }, {});
+    return userInfo;
+  }
 }
 
 module.exports = UserStorage;
