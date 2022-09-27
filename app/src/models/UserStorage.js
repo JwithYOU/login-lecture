@@ -5,7 +5,7 @@ const { userInfo } = require('os');
 const fs = require("fs").promises; // promises를 붙여줌으로써 유지보수 및 읽기에 좋다 
 
 class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
-  static #getUserInfo(data, id) { // private한 변수나 메서드는 최상단에 올려준다
+  static #getUserInfo(data, id) { // private한 변수나 메서드는 최상단에 올려준다(개발자 사이에 국룰)
     const users = JSON.parse(data);
         const idx = users.id.indexOf(id);
         const userKeys = Object.keys(users); // => [id, psword, name];
@@ -16,19 +16,29 @@ class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
         return userInfo;
   }
 
-  static getUsers(...fields) {
-    // const users = this.#users;
-    const newUsers = fields.reduce((arr, cur) => {
-      if(users.hasOwnProperty(cur)) {
-        arr[cur] = users[cur];
-        return arr;
+  static #getUsers(data, isAll, fields) {
+    const users = JSON.parse(data);
+    if(isAll) return users;
+
+    const newUsers = fields.reduce((newUsers, field) => {
+      if(users.hasOwnProperty(field)) {
+        newUsers[field] = users[field];
+        return newUsers;
       }
     }, {})
     return newUsers;
   }
 
+  static getUsers(isAll, ...fields) {
+    return fs 
+      .readFile("./src/databases/users.json")
+      .then((data) => {
+        return this.#getUsers(data, isAll, fields);
+      })
+      .catch(console.error()); // err => console.log(err)
+  }
+
   static getUserInfo(id) {
-    // const users = this.#users; // 전체 아이디, 비밀번호 불러옴
     return fs 
       .readFile("./src/databases/users.json")
       .then((data) => {
@@ -37,11 +47,16 @@ class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
       .catch(console.error()); // err => console.log(err)
   }
   
-  static save(userInfo) {
-    // const users = this.#users;
+  static async save(userInfo) {
+    const users = await this.getUsers(true); // 데이터를 전부 다 불러오고 싶을 때는 ture만 써도 됨
+    if(users.id.includes(userInfo.id)) {
+      throw "이미 존재하는 아이디 입니다.";
+    }
     users.id.push(userInfo.id);
-    users.name.push(userInfo.name);
     users.psword.push(userInfo.psword);
+    users.name.push(userInfo.name);
+    // 데이터 추가
+    fs.writeFile("./src/databases/users.json", JSON.stringify(users)) // 첫번졔 파라미터에는 파일경로, 두번쨰 파라미터에는 저장할 데이터
     return { success: true };
   }
 }
