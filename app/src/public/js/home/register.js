@@ -14,7 +14,7 @@ function register() {
 
   const req = {
     id: id.value,
-    userName: userName.value,
+    name: userName.value,
     psword: psword.value,
     confirmPsword: confirmPsword.value,
   };
