@@ -75,6 +75,23 @@ class UserStorage { // class안에는 따로 변수명을 선언할 필요 x
     // fs.writeFile("./src/databases/users.json", JSON.stringify(users)) // 첫번졔 파라미터에는 파일경로, 두번쨰 파라미터에는 저장할 데이터
     // return { success: true };
   }
+
+  static noticeSave(id) {
+    return new Promise((resolve,reject)=> {
+      const query = "SELECT * FROM users WHERE id=?;"; 
+      db.query(query, [id], (err, data)=> {
+        if(err) reject(err);
+        resolve(data[0]);
+      })  
+    }) 
+    
+    // return fs 
+    //   .readFile("./src/databases/users.json")
+    //   .then((data) => {
+    //     return this.#getUserInfo(data, id);
+    //   })
+    //   .catch(console.error()); // err => console.log(err)
+  }
 }
 
 module.exports = UserStorage;
